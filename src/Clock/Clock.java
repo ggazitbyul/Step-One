@@ -28,11 +28,19 @@ public class Clock {
     }
 
     public void setMinutes(byte minutes) {
+        int wrapCount = 0;
+
         while (minutes < 0) {
+            --wrapCount; // 마이너스경우
             minutes += 60;
         }
+        wrapCount += minutes / 60;  // 플러스 경우
 
         this.minutes = (byte) (minutes % 60);
+
+        if (wrapCount != 0) {
+            setHours((byte) (this.hours + wrapCount));
+        }
     }
 
     public byte getSeconds() {
@@ -40,11 +48,19 @@ public class Clock {
     }
 
     public void setSeconds(byte seconds) {
-        while (seconds<0){
-            seconds+=60;
+        int wrapCount = 0;
+
+        while (seconds < 0) {
+            --wrapCount;
+            seconds += 60;
         }
 
-        this.seconds = (byte) (seconds%60);
+        wrapCount += seconds / 60;
+
+        this.seconds = (byte) (seconds % 60);
+        if(wrapCount!=0){
+            setMinutes((byte) (this.minutes + wrapCount));
+        }
     }
 
     public void setTime(byte hours, byte minutes, byte seconds) {
