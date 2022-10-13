@@ -19,11 +19,12 @@ public class Program {
         System.out.println("'초'를 입력하세요 ");
         byte second = scanner.nextByte();
 
-        test.setHours(hour);
-        test.setMinutes(minute);
-        test.setSeconds(second);
+        test.setTime(hour,minute,second);
+//        test.setHours(hour);
+//        test.setMinutes(minute);
+//        test.setSeconds(second);
 
-        System.out.printf("%d시, %d분, %d초 입니다.",test.getHours(),test.getMinutes(),test.getSeconds());
+        System.out.printf("%d시, %d분, %d초 입니다. %s",test.getHours(),test.getMinutes(),test.getSeconds(),System.lineSeparator());
 
     }
 }
