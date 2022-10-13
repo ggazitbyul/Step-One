@@ -14,8 +14,13 @@ public class Clock {
     }
 
     public void setHours(byte hours) {
-        this.hours = (byte) Math.min(Math.max(1,hours),12); // (1~12)1과 hours 중 큰값과, 12중 작은값을 반환.
-                                                            // hours가 1보다 작은경우 무조건 1이 될거고, 12보다 값이 크면 12로 고정..
+        int value = hours - 1;
+
+        while (value < 0) {
+            value += 12; // 0이거나 작은수일 경우만  while 동작. 12를 더한다.
+        }
+
+        this.hours = (byte) (value % 12 + 1);
     }
 
     public byte getMinutes() {
@@ -23,7 +28,11 @@ public class Clock {
     }
 
     public void setMinutes(byte minutes) {
-        this.minutes = (byte) Math.min(Math.max(0,minutes),59);  // (0~59) 0보단 작을수없고, 59보다 클수없다.
+        while (minutes < 0) {
+            minutes += 60;
+        }
+
+        this.minutes = (byte) (minutes % 60);
     }
 
     public byte getSeconds() {
@@ -31,7 +40,11 @@ public class Clock {
     }
 
     public void setSeconds(byte seconds) {
-        this.seconds = (byte) Math.min(Math.max(0,seconds),59);  // (0~59) 0보단 작을수없고, 59보다 클수없다.
+        while (seconds<0){
+            seconds+=60;
+        }
+
+        this.seconds = (byte) (seconds%60);
     }
 
     public void setTime(byte hours, byte minutes, byte seconds) {
